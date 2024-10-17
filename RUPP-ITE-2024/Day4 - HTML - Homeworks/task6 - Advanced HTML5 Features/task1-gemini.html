@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Theme Color Selector</title>
+</head>
+<body>
+  <div id="color-picker">
+    <input type="radio" name="theme" value="red" id="red">
+    <label for="red">Red</label>
+    <input type="radio" name="theme" value="blue" id="blue">
+    <label for="blue">Blue</label>
+    <input type="radio" name="theme" value="green" id="green">
+    <label for="green">Green</label>
+  </div>
+
+  <script>
+    // Get the color picker elements
+    const colorPicker = document.getElementById("color-picker");
+    const radioButtons = colorPicker.querySelectorAll("input[name='theme']");
+
+    // Load the saved theme color from localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      // Set the saved theme color
+      document.body.style.backgroundColor = savedTheme;
+      // Check the corresponding radio button
+      radioButtons.forEach(radio => {
+        if (radio.value === savedTheme) {
+          radio.checked = true;
+        }
+      });
+    }
+
+    // Handle color selection
+    radioButtons.forEach(radio => {
+      radio.addEventListener("change", () => {
+        // Set the body background color
+        document.body.style.backgroundColor = radio.value;
+        // Save the selected theme to localStorage
+        localStorage.setItem("theme", radio.value);
+      });
+    });
+  </script>
+</body>
+</html>
